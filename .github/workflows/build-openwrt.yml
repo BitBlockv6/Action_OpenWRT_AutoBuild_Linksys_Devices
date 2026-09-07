@@ -716,7 +716,7 @@ jobs:
           echo "::set-output name=status::success"
 ### --------------------------- ###
       - name: If Error (Build Firmware)
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: steps.compile.outcome == 'failure'
             && env.UPLOAD_BUILD_LOGS == 'true'
         with:
@@ -735,7 +735,7 @@ jobs:
           echo "::set-output name=status::success"
 ### --------------------------- ###
       - name: If Error (Generate Buildinfo)
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: steps.buildinfo.outcome == 'failure'
             && env.UPLOAD_BUILD_LOGS == 'true'
         with:
@@ -754,7 +754,7 @@ jobs:
           echo "::set-output name=status::success"
 ### --------------------------- ###
       - name: If Error (Generate JSON Overview)
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: steps.overview.outcome == 'failure'
             && env.UPLOAD_BUILD_LOGS == 'true'
         with:
@@ -773,7 +773,7 @@ jobs:
           echo "::set-output name=status::success"
 ### --------------------------- ###
       - name: If Error (Generate HASH)
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: steps.hash.outcome == 'failure'
             && env.UPLOAD_BUILD_LOGS == 'true'
         with:
@@ -962,7 +962,7 @@ jobs:
           [ ! -e "./logs/build.log" ] || cat "./logs/build.log"
 ### ----------------------------------------------------------------- ###
       - name: Upload kmods
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: >-
           steps.compile.outputs.status == 'success' && steps.compile.outcome == 'success' && env.UPLOAD_KMODS ==
           'true'
@@ -971,7 +971,7 @@ jobs:
           path: 'openwrt/bin/targets/mvebu/cortexa9/kmods/${{ env.KMOD_DIR }}'
 ### ----------------------------------------------------------------- ###
       - name: Upload Packages
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: >-
           steps.compile.outputs.status == 'success' && steps.compile.outcome == 'success' && env.UPLOAD_PACKAGES ==
           'true'
@@ -980,7 +980,7 @@ jobs:
           path: openwrt/bin/packages/
 ### ----------------------------------------------------------------- ###
       - name: Upload bin directory
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: >-
           steps.compile.outputs.status == 'success' && steps.compile.outcome == 'success' && env.UPLOAD_BIN_DIR ==
           'true'
@@ -989,7 +989,7 @@ jobs:
           path: openwrt/bin
 ### ----------------------------------------------------------------- ###
       - name: Upload logs directory
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: env.UPLOAD_BUILD_LOGS == 'true'
         with:
           name: 'OpenWrt_logs${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}'
@@ -1005,7 +1005,7 @@ jobs:
           echo "::set-output name=status::success"
 ### ----------------------------------------------------------------- ###
       - name: Upload firmware directory
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v4
         if: steps.organize.outputs.status == 'success' && steps.compile.outcome == 'success' && !cancelled()
         with:
           name: 'OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}'
