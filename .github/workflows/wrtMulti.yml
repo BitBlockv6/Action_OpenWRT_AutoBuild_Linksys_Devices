@@ -23,14 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Emit repository_dispatch
-        uses: mvasigh/dispatch-action@main
+        uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
-          repo: Action_OpenWRT_AutoBuild_Linksys_Devices
-          owner: BitBlockv6
-          event_type: repository_dispatch
-          message: |
-            {
-              "HARDWARE_DEVICE": "wrtmulti",
-              "HARDWARE_ID": "wrtmulti"
-            }
+          repository: BitBlockv6/Action_OpenWRT_AutoBuild_Linksys_Devices
+          event-type: repository_dispatch
+          client-payload: '{"message": {"HARDWARE_DEVICE": "wrtmulti", "HARDWARE_ID": "wrtmulti"}}'
